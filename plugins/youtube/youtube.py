@@ -411,9 +411,8 @@ def channel_strm(youtube_channel, youtube_channel_url, method):
         "{}/{}".format(
             media_folder,  
             sanitize(
-                "{} [{}]".format(
-                    yt.channel_name_folder,
-                    yt.channel_id
+                "{}".format(
+                    yt.channel_name_folder
                 )
             )
         ),
@@ -671,7 +670,7 @@ def direct(youtube_id): #Sponsorblock doesn't work in this mode
     youtube_url = w.worker(command).output()
     return redirect(
         youtube_url, 
-        code=301
+        code=302
     )
 
 def bridge(youtube_id):
