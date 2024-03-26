@@ -23,8 +23,8 @@ class nfo:
         nfo_content = template.format(**self.nfo_data)
 
         # Crear el archivo NFO
-        with open(f"{self.nfo_path}/{nfo_filename}", "w", encoding="utf-8") as nfo_file:
-            nfo_file.write(nfo_content.strip())
+        #with open(f"{self.nfo_path}/{nfo_filename}", "w", encoding="utf-8") as nfo_file:
+        #    nfo_file.write(nfo_content.strip())
 
 
     tvshow_template = """

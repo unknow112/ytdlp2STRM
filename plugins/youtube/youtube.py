@@ -1,6 +1,7 @@
 from flask import stream_with_context, Response, send_file, redirect
 from sanitize_filename import sanitize
 import os
+import re
 import time
 import platform
 from clases.config import config as c
@@ -411,8 +412,9 @@ def channel_strm(youtube_channel, youtube_channel_url, method):
         "{}/{}".format(
             media_folder,  
             sanitize(
-                "{}".format(
-                    yt.channel_name_folder
+                "{} [{}]".format(
+                    yt.channel_name_folder,
+                    yt.channel_id
                 )
             )
         ),
@@ -452,11 +454,12 @@ def channel_strm(youtube_channel, youtube_channel_url, method):
             video_thumbnail = str(line).rstrip().split(';')[3]
             video_description = str(line).rstrip().split(';')[4]
 
-            video_name = "{} - {} [{}]".format(
-                video_upload_date,
+            video_name = "{} [{}]".format(
                 video_upload_name, 
                 video_id
             )
+            RE_prefix = re.compile('^[^a-zA-Z]*')
+            video_name = video_name.removeprefix(RE_prefix.search(video_name).group())
 
             if extract_audio:
                 video_id += '-audio'
